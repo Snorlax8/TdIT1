@@ -122,10 +122,14 @@ def search(request):
         movies_result = requests.get('https://swapi.co/api/films/'+'?search='+q)
         movies = movies_result.json()
         movies_sources = []
-        movies_sources.append(movies)
+
+        for pelicula in movies["results"]:
+            movies_sources.append(pelicula)
+
         while movies["next"]:
             movies = requests.get(movies["next"]).json()
-            movies_sources.append(movies)
+            for pelicula in movies["results"]:
+                movies_sources.append(pelicula)
 
         character_result = requests.get('https://swapi.co/api/people/'+'?search='+q)
         characters = character_result.json()

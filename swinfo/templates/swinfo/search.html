@@ -8,51 +8,50 @@
         <input type="submit" value="Buscar">
 </form>
 
-<table style="width:20%">
- <tr>
-   <th>Películas</th>
- </tr>
-{% for movie in movies%}
-  {% for film in movie.results %}
-    <tr>
-      <td class="click"><a href = "{% url 'detail' film.episode_id %}">{{ film.title }}</a></td>
-    </tr>
+{% if movies %}
+  <h2>Películas:</h2>
+  <table style="width:20%">
+  {% for movie in movies%}
+      <tr>
+        <td class="click"><a href = "{% url 'detail' movie.episode_id %}">{{ movie.title }}</a></td>
+      </tr>
   {% endfor %}
-{% endfor %}
-</table>
-<h1></h1>
+  </table>
+{% endif %}
+
+
+{% if characters%}
+<h2>Personajes:</h2>
+
+  <table style="width:20%">
+
+  {% for character in characters%}
+
+      <tr>
+        <td class="click"> <a href="{% url 'character_detail' character.id%}">{{ character.name }}</a></td>
+      </tr>
+
+  {% endfor %}
+  </table>
+{% endif %}
+
+{% if planets%}
+  <h2>Planetas:</h2>
+  <table style="width:20%">
+  {% for planet in planets%}
+
+      <tr>
+        <td class="click"> <a href="{% url 'planet_detail' planet.id%}">{{ planet.name }}</a></td>
+      </tr>
+
+  {% endfor %}
+  </table>
+{% endif %}
+
+{% if ships %}
+<h2>Naves:</h2>
 <table style="width:20%">
- <tr>
-   <th>Personajes</th>
- </tr>
-{% for character in characters%}
 
-    <tr>
-      <td class="click"> <a href="{% url 'character_detail' character.id%}">{{ character.name }}</a></td>
-    </tr>
-
-{% endfor %}
-</table>
-
-<h1></h1>
-<table style="width:20%">
- <tr>
-   <th>Planetas</th>
- </tr>
-{% for planet in planets%}
-
-    <tr>
-      <td class="click"> <a href="{% url 'planet_detail' planet.id%}">{{ planet.name }}</a></td>
-    </tr>
-
-{% endfor %}
-</table>
-
-<h1></h1>
-<table style="width:20%">
- <tr>
-   <th>Naves</th>
- </tr>
 {% for ship in ships%}
 
     <tr>
@@ -61,3 +60,4 @@
 
 {% endfor %}
 </table>
+{% endif %}
