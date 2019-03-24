@@ -5,6 +5,12 @@
   <link rel="stylesheet" href="{% static 'swinfo/css/swinfo.css' %}">
 <h1>{{ movie.title }}</h1>
 </head>
+
+<form action="/search/" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Buscar">
+</form>
+
 <table style="width:100%">
  <tr>
    <th>Nombre</th>
