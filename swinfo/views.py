@@ -92,3 +92,25 @@ def ship_detail(request, starship_id):
         'films':films,
         'pilots':pilots,
     })
+
+def planet_detail(request, planet_id):
+    response = requests.get('https://swapi.co/api/planets/'+str(planet_id))
+    planet = response.json()
+    films = []
+    residents = {}
+
+    for film in planet['films']:
+        movie = requests.get(film)
+        films.append(movie.json())
+
+    for resident in planet['residents']:
+        residente = requests.get(resident)
+        head, partition, tail = resident.partition("people/")
+        residente_id = tail[:-1]
+        residents.update({residente.json()['name']:residente_id})
+
+    return render(request, 'swinfo/planet_detail.html',{
+        'planet':planet,
+        'films':films,
+        'residents':residents,
+    })

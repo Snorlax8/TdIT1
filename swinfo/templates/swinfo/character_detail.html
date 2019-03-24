@@ -47,7 +47,7 @@
   {% for key, value in starships.items %}
 
    <tr>
-     <td >{{key}}</td>
+     <td class="click"> <a href= "{% url 'ship_detail' value %}">{{key}}</a></td>
    </tr>
   {%endfor%}
   </table>
